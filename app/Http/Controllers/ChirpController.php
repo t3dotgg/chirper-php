@@ -15,7 +15,7 @@ class ChirpController extends Controller {
      */
     public function index(): Response {
         return Inertia::render("Chirps/index", [
-            //
+            "chirps" => Chirp::with("user:id,name")->latest()->get(),
         ]);
     }
 
@@ -32,6 +32,12 @@ class ChirpController extends Controller {
     public function store(Request $request): RedirectResponse {
         $validated = $request->validate([
             "message" => "required|string|max:255",
+        ]);
+
+        // Log the creation of a new chirp
+        \Illuminate\Support\Facades\Log::info("New chirp created", [
+            "user_id" => $request->user()->id,
+            "message" => $validated["message"],
         ]);
 
         $request->user()->chirps()->create($validated);
