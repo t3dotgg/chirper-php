@@ -1,0 +1,9 @@
+{
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "printWidth": 80,
+    "phpVersion": "8.1",
+    "braceStyle": "1tbs",
+    "plugins": ["@prettier/plugin-php"]
+}
